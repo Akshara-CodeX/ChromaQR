@@ -217,7 +217,7 @@ Feel free to share your thoughts!
 
 ## 👩‍💻 Developer
 
-Created with 💜, creativity, and JavaScript.
+Created with 💜, creativity, and JavaScript by AKSHARA.
 
 **Project:** ChromaQR – Customizable QR Code Generator
 
