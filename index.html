@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChromaQR - Image-Colored QR Code Generator</title>
+    <meta name="description" content="Generate beautiful, scannable QR codes colored by your images and photographs using pure HTML5, CSS3, and JavaScript.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-wrapper">
+                <div class="brand-icon">✨</div>
+                <div>
+                    <h1 class="brand-title">ChromaQR</h1>
+                    <p class="header-subtitle">Turn any link into a QR code colored with your picture</p>
+                </div>
+                <span class="brand-badge">PHOTO ON QR</span>
+                <div class="welcome-widget">
+                    <div id="greetingText" class="greeting-text">Hello there ✨</div>
+                    <div id="dateTimeText" class="date-time-text">Loading local date & time…</div>
+                </div>
+            </div>
+
+            <!-- Theme Switcher -->
+            <div class="theme-switcher-container">
+                <span class="theme-label">THEMES</span>
+                <div class="theme-pills" id="themePills">
+                    <button type="button" class="theme-pill active" data-theme="default" title="Quantum Indigo">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #6366f1, #06b6d4);"></span>
+                        <span class="theme-name">Quantum</span>
+                    </button>
+                    <!-- <button type="button" class="theme-pill" data-theme="cyberpunk" title="Cyberpunk Neon 2099">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #ff007f, #00f2fe);"></span>
+                        <span class="theme-name">Cyberpunk</span>
+                    </button> -->
+                    <!-- <button type="button" class="theme-pill" data-theme="synthwave" title="Retro Synthwave '84">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #ff2a6d, #ff9e00);"></span>
+                        <span class="theme-name">Synthwave</span>
+                    </button> -->
+                    <!-- <button type="button" class="theme-pill" data-theme="emerald-zen" title="Emerald Zen Rainforest">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #00f260, #00b4db);"></span>
+                        <span class="theme-name">Emerald</span>
+                    </button>
+                    <button type="button" class="theme-pill" data-theme="nordic-aurora" title="Nordic Aurora Borealis">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #38ef7d, #11998e);"></span>
+                        <span class="theme-name">Aurora</span>
+                    </button> -->
+                    <!-- <button type="button" class="theme-pill" data-theme="midnight-gold" title="Obsidian & Royal Gold">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #f5af19, #e65c00);"></span>
+                        <span class="theme-name">Royal Gold</span>
+                    </button> -->
+                    <!-- <button type="button" class="theme-pill" data-theme="sakura-bloom" title="Midnight Sakura Blossom">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #ff758c, #ff7eb3);"></span>
+                        <span class="theme-name">Sakura</span>
+                    </button> -->
+                    <!-- <button type="button" class="theme-pill" data-theme="lavender-dream" title="Lavender Dream">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #c084fc, #818cf8);"></span><span class="theme-name">Lavender</span>
+                    </button>
+                    <button type="button" class="theme-pill" data-theme="peachy" title="Peachy Cream">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #ffb199, #ffecd2);"></span><span class="theme-name">Peach</span>
+                    </button> -->
+                    <button type="button" class="theme-pill" data-theme="ocean-breeze" title="Ocean Breeze">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #00c6ff, #0072ff);"></span><span class="theme-name">Ocean</span>
+                    </button>
+                    <button type="button" class="theme-pill" data-theme="matcha" title="Matcha Latte">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #a8c686, #557153);"></span><span class="theme-name">Matcha</span>
+                    </button>
+                    <button type="button" class="theme-pill" data-theme="rose-quartz" title="Rose Quartz">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #f4acb7, #cdb4db);"></span><span class="theme-name">Rose</span>
+                    </button>
+                    <button type="button" class="theme-pill" data-theme="minimal-light" title="Minimal Light">
+                        <span class="theme-dot" style="background: linear-gradient(135deg, #334155, #cbd5e1);"></span><span class="theme-name">Minimal</span>
+                    </button>
+                   <button type="button" class="theme-pill" data-theme="soft-blus" title="Soft Blush Pink Glassmorphism">
+  <span class="theme-dot" style="background: linear-gradient(135deg, #f9a8d4, #fbcfe8);"></span>
+  <span class="theme-name">Tech</span>
+</button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="app-main">
+        <!-- LEFT: Controls & Customization -->
+        <div class="glass-panel">
+            <!-- 1. Destination URL -->
+            <div class="form-group">
+                <label class="form-label" for="urlInput">
+                    <span>1. Destination Link or URL</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">LinkedIn, GitHub, Portfolio, etc.</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="urlInput" 
+                    class="input-text" 
+                    placeholder="https://linkedin.com/in/yourprofile" 
+                    value="https://linkedin.com"
+                    spellcheck="false"
+                >
+                <!-- Quick Preset Chips -->
+                <div class="quick-links-group">
+                    <button type="button" class="quick-link-btn active" data-url="https://linkedin.com">💼 LinkedIn</button>
+                    <button type="button" class="quick-link-btn" data-url="https://github.com">🐙 GitHub</button>
+                    <button type="button" class="quick-link-btn" data-url="https://twitter.com">🐦 Twitter/X</button>
+                    <button type="button" class="quick-link-btn" data-url="https://myportfolio.dev">🌐 Portfolio</button>
+                    <button type="button" class="quick-link-btn" data-url="https://myportfolio.dev">🔗 Others</button>
+                </div>
+            </div>
+
+            <!-- 2. Source Image (Upload or Pick Sample) -->
+            <div class="form-group">
+                <label class="form-label">
+                    <span>2. Picture / Color Palette Source</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">The QR code inherits colors from this image</span>
+                </label>
+
+                <!-- File Drop Zone -->
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" class="file-input-hidden" accept="image/*">
+                    <div class="drop-zone-content">
+                        <svg class="drop-zone-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="drop-title">Drop your image here or click to browse</span>
+                        <span class="drop-subtitle">Supports PNG, JPG, WebP, SVG</span>
+                    </div>
+                </div>
+                <div id="uploadPreview" class="upload-preview-container"></div>
+
+                <!-- Or choose preset sample picture -->
+                <div style="margin-top: 0.5rem;">
+                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 0.4rem;">
+                        Or try with instant sample pictures:
+                    </span>
+                    <div class="sample-picker-grid" id="samplePicker"></div>
+                </div>
+            </div>
+
+            <!-- 3. Coloring Style / Blend Mode -->
+            <div class="form-group">
+                <label class="form-label">
+                    <span>3. Color Generation Technique</span>
+                </label>
+                <div class="segmented-grid">
+                    <div class="segmented-option">
+                        <input type="radio" id="modeSampler" name="renderMode" value="sampler" checked>
+                        <label for="modeSampler" class="segmented-label">
+                            <span class="option-name">Pixel Sampler</span>
+                            <span class="option-desc">Direct Image Pixels</span>
+                        </label>
+                    </div>
+                    <div class="segmented-option">
+                        <input type="radio" id="modeTexture" name="renderMode" value="texture">
+                        <label for="modeTexture" class="segmented-label">
+                            <span class="option-name">Texture Mask</span>
+                            <span class="option-desc">Clipped from Picture</span>
+                        </label>
+                    </div>
+                    <div class="segmented-option">
+                        <input type="radio" id="modeBlend" name="renderMode" value="blend">
+                        <label for="modeBlend" class="segmented-label">
+                            <span class="option-name">Artistic Blend</span>
+                            <span class="option-desc">Photo Background</span>
+                        </label>
+                    </div>
+                    <div class="segmented-option">
+                        <input type="radio" id="modePalette" name="renderMode" value="palette">
+                        <label for="modePalette" class="segmented-label">
+                            <span class="option-name">Palette Gradient</span>
+                            <span class="option-desc">Extracted Palette</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Module Shape & Background -->
+            <div class="two-cols">
+                <div class="form-group">
+                    <label class="form-label">Dot Shape</label>
+                    <div class="segmented-grid">
+                        <div class="segmented-option">
+                            <input type="radio" id="shapeRounded" name="dotShape" value="rounded" checked>
+                            <label for="shapeRounded" class="segmented-label">
+                                <span class="option-name">Rounded</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="shapeCircle" name="dotShape" value="circle">
+                            <label for="shapeCircle" class="segmented-label">
+                                <span class="option-name">Circle</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="shapeSquare" name="dotShape" value="square">
+                            <label for="shapeSquare" class="segmented-label">
+                                <span class="option-name">Square</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="shapeSquircle" name="dotShape" value="squircle">
+                            <label for="shapeSquircle" class="segmented-label">
+                                <span class="option-name">Squircle</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Background</label>
+                    <div class="segmented-grid">
+                        <div class="segmented-option">
+                            <input type="radio" id="bgWhite" name="bgStyle" value="white" checked>
+                            <label for="bgWhite" class="segmented-label">
+                                <span class="option-name">White</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="bgDark" name="bgStyle" value="dark">
+                            <label for="bgDark" class="segmented-label">
+                                <span class="option-name">Dark</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="bgCream" name="bgStyle" value="cream">
+                            <label for="bgCream" class="segmented-label">
+                                <span class="option-name">Cream</span>
+                            </label>
+                        </div>
+                        <div class="segmented-option">
+                            <input type="radio" id="bgTrans" name="bgStyle" value="transparent">
+                            <label for="bgTrans" class="segmented-label">
+                                <span class="option-name">Clear</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Advanced Sliders (Contrast, Dot Size, Vibrancy) -->
+            <div class="form-group">
+                <div class="two-cols">
+                    <div class="slider-wrapper">
+                        <div class="form-label">
+                            <span>Scannability Contrast</span>
+                            <span id="contrastVal" style="color: var(--primary);">35%</span>
+                        </div>
+                        <input type="range" id="contrastBoost" class="range-slider" min="0" max="80" value="35">
+                    </div>
+                    <div class="slider-wrapper">
+                        <div class="form-label">
+                            <span>Color Vibrancy</span>
+                            <span id="vibrancyVal" style="color: var(--accent-cyan);">+20%</span>
+                        </div>
+                        <input type="range" id="vibrancy" class="range-slider" min="-30" max="50" value="20">
+                    </div>
+                </div>
+                <div class="slider-wrapper" style="margin-top: 0.6rem;">
+                    <div class="form-label">
+                        <span>Dot Scale / Padding</span>
+                        <span id="dotScaleVal">90%</span>
+                    </div>
+                    <input type="range" id="dotScale" class="range-slider" min="0.65" max="1.0" step="0.05" value="0.9">
+                </div>
+            </div>
+
+            <!-- 6. Corner Eyes & Center Logo -->
+            <div class="two-cols">
+                <div class="form-group">
+                    <label class="form-label" for="eyeStyle">Corner Eye Style</label>
+                    <select id="eyeStyle" class="select-input">
+                        <option value="rounded" selected>Curved / Rounded</option>
+                        <option value="circle">Double Circle</option>
+                        <option value="square">Classic Square</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="eyeColorMode">Corner Eye Colors</label>
+                    <select id="eyeColorMode" class="select-input">
+                        <option value="image-accent" selected>Image Primary Accent</option>
+                        <option value="contrast">High Contrast (Solid)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 7. Center Avatar / Logo Badge -->
+            <div class="form-group" style="padding-top: 0.5rem; border-top: 1px solid var(--border-color);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="toggle-switch-label">
+                        <input type="checkbox" id="centerLogoCheck" class="toggle-switch-input" checked>
+                        <div class="toggle-switch"><div class="toggle-slider"></div></div>
+                        <span>Embed Center Avatar / Badge</span>
+                    </label>
+                    <select id="logoType" class="select-input" style="width: auto; padding: 0.4rem 0.75rem;">
+                        <option value="auto" selected>Picture Avatar</option>
+                        <option value="linkedin">LinkedIn Icon</option>
+                        <option value="github">GitHub Octo</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="x">X / Twitter</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Live Canvas Preview & Export -->
+        <div class="glass-panel preview-panel">
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="section-title">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                    Live Preview
+                </h2>
+                <div class="qr-meta-pills">
+                    <span class="meta-pill" id="qrVersionText">v4</span>
+                    <span class="meta-pill" id="qrModulesText">33x33</span>
+                </div>
+            </div>
+
+            <!-- The QR Canvas -->
+            <div class="canvas-container">
+                <canvas id="qrCanvas" width="800" height="800"></canvas>
+            </div>
+            <div class="qr-under-image" id="qrUnderImage">
+                <img id="underQrImage" alt="Selected source image preview">
+                <span id="underQrCaption">Your image, right below your QR ✨</span>
+            </div>
+            <div class="preview-extra-controls">
+                <label class="toggle-switch-label">
+                    <input type="checkbox" id="showUnderImage" class="toggle-switch-input" checked>
+                    <div class="toggle-switch"><div class="toggle-slider"></div></div>
+                    <span>Show image below QR</span>
+                </label>
+                <label class="toggle-switch-label">
+                    <input type="checkbox" id="showQrCaption" class="toggle-switch-input" checked>
+                    <div class="toggle-switch"><div class="toggle-slider"></div></div>
+                    <span>Show caption</span>
+                </label>
+            </div>
+            <div class="form-group caption-control">
+                <label class="form-label" for="qrCaptionInput">QR caption / label</label>
+                <input type="text" id="qrCaptionInput" class="input-text" maxlength="48" placeholder="Scan me ✨" value="Scan me ✨">
+            </div>
+
+            <!-- Live Scannability Status Meter -->
+            <div class="status-bar">
+                <div id="scannabilityBadge" class="scannability-badge scan-excellent">
+                    <span class="scan-dot"></span>
+                    <span>Excellent (100% Scannable)</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                    Contrast: <strong id="contrastRatioText" style="color: var(--text-primary);">6.8:1</strong>
+                </div>
+            </div>
+
+            <!-- Export Buttons -->
+            <div class="export-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Download Resolution:</span>
+                    <select id="resolutionSelect" class="select-input" style="width: auto; padding: 0.35rem 0.75rem;">
+                        <option value="1024" selected>1024 x 1024 px (HD)</option>
+                        <option value="2048">2048 x 2048 px (Print / 4K)</option>
+                        <option value="512">512 x 512 px (Web)</option>
+                    </select>
+                </div>
+                <div class="export-row">
+                    <button type="button" id="downloadPngBtn" class="btn btn-primary">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download PNG
+                    </button>
+                    <button type="button" id="downloadSvgBtn" class="btn btn-secondary" title="Download pure vector SVG for print/Canva/Figma">
+                        Vector SVG
+                    </button>
+                    <button type="button" id="copyClipboardBtn" class="btn btn-secondary" title="Copy high-res image to clipboard">
+                        Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Built with Pure HTML5 Canvas, CSS3, and Vanilla JavaScript • ISO/IEC 18004 Compliant QR Generator</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="qr-engine.js"></script>
+    <script src="sample-images.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
